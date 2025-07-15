@@ -39,6 +39,7 @@
     <Setter Property="Padding" Value="0" />
     <Setter Property="SystemDecorations"
             Value="Full"/>
+    <Setter Property="TitleTemplate" Value="{StaticResource ManagedWindowHeaderTemplate}"/>
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate>
@@ -52,88 +53,7 @@
                   Background="{TemplateBinding Background}">
 
               <!--Title Bar-->
-              <Grid Name="PART_TitleBar"
-                    ColumnDefinitions="Auto * Auto"
-                    Background="{DynamicResource ManagedWindow_TitleBarBackgroundBrush}">
-                <Grid.Styles>
-                  <Style Selector="Button">
-                    <Setter Property="Background" Value="Transparent"/>
-                  </Style>
-                </Grid.Styles>
-
-                <!-- Icon -->
-                <ContentPresenter Grid.Column="0"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Center"
-                                  Content="{TemplateBinding Icon}" />
-                <!-- Title -->
-                <TextBlock Name="PART_Title"
-                           Grid.Column="1"
-                           Foreground="{DynamicResource ManagedWindow_TitleBarForegroundBrush}"
-                           VerticalAlignment="Center"
-                           FontFamily="{TemplateBinding FontFamily}"
-                           FontSize="{TemplateBinding FontSize}"
-                           FontWeight="{TemplateBinding FontWeight}"
-                           FontStyle="{TemplateBinding FontStyle}"
-                           Text="{TemplateBinding Title}"/>
-
-                <!-- System Decorations (aka buttons)-->
-                <StackPanel Grid.Column="2"
-                            Orientation="Horizontal"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Right">
-                  <StackPanel.Spacing>
-                    <console:OnPlatformExtension x:TypeArguments="x:Double" Default="8" Console="-1" />
-                  </StackPanel.Spacing>
-                  <Button Name="PART_MinimizeButton"
-                          IsTabStop="True"
-                          Foreground="{DynamicResource ManagedWindow_TitleBarForegroundBrush}">
-                    <console:OnPlatform Console="🗕">
-                      <console:OnPlatform.Default>
-                        <iconPacks:Codicons Kind="ChromeMinimize"
-                                            Width="{StaticResource ManagedWindow_SystemIconSize}"
-                                            Height="{StaticResource ManagedWindow_SystemIconSize}"/>
-                      </console:OnPlatform.Default>
-                    </console:OnPlatform>
-                  </Button>
-                  <Button Name="PART_MaximizeButton"
-                          IsVisible="False"
-                          IsTabStop="True"
-                          Foreground="{DynamicResource ManagedWindow_TitleBarForegroundBrush}">
-
-                    <console:OnPlatform Console="🗖">
-                      <console:OnPlatform.Default>
-                        <iconPacks:Codicons Kind="ChromeMaximize"
-                                        Width="{StaticResource ManagedWindow_SystemIconSize}"
-                                        Height="{StaticResource ManagedWindow_SystemIconSize}"/>
-                      </console:OnPlatform.Default>
-                    </console:OnPlatform>
-                  </Button>
-                  <Button Name="PART_RestoreButton"
-                          IsVisible="False"
-                          IsTabStop="True"
-                          Foreground="{DynamicResource ManagedWindow_TitleBarForegroundBrush}">
-                    <console:OnPlatform Console="🗗">
-                      <console:OnPlatform.Default>
-                        <iconPacks:Codicons Kind="ChromeRestore"
-                                        Width="{StaticResource ManagedWindow_SystemIconSize}"
-                                        Height="{StaticResource ManagedWindow_SystemIconSize}"/>
-                      </console:OnPlatform.Default>
-                    </console:OnPlatform>
-                  </Button>
-                  <Button Name="PART_CloseButton"
-                          IsTabStop="True"
-                          Foreground="{DynamicResource ManagedWindow_TitleBarForegroundBrush}">
-                    <console:OnPlatform Console="🗙">
-                      <console:OnPlatform.Default>
-                        <iconPacks:Codicons Kind="ChromeClose"
-                                        Width="{StaticResource ManagedWindow_SystemIconSize}"
-                                        Height="{StaticResource ManagedWindow_SystemIconSize}"/>
-                      </console:OnPlatform.Default>
-                    </console:OnPlatform>
-                  </Button>
-                </StackPanel>
-              </Grid>
+                <ContentControl Name="PART_TitleBar" Template="{TemplateBinding TitleTemplate}" />
 
               <!-- window content-->
               <ContentPresenter Grid.Row="1"

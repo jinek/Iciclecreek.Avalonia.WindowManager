@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Platform;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
 using Avalonia.Input;
 using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
@@ -113,6 +114,12 @@ public class ManagedWindow : OverlayPopupHost
     /// </summary>
     public static readonly StyledProperty<object?> IconProperty =
         AvaloniaProperty.Register<ManagedWindow, object?>(nameof(Icon));
+
+    /// <summary>
+    /// Defines the <see cref="TitleTemplate"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IControlTemplate?> TitleTemplateProperty =
+        AvaloniaProperty.Register<ManagedWindow, IControlTemplate?>(nameof(TitleTemplate));
 
     /// <summary>
     /// Defines the <see cref="WindowStartupLocation"/> property.
@@ -291,6 +298,15 @@ public class ManagedWindow : OverlayPopupHost
     {
         get => GetValue(IconProperty);
         set => SetValue(IconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the template for the window header.
+    /// </summary>
+    public IControlTemplate? TitleTemplate
+    {
+        get => GetValue(TitleTemplateProperty);
+        set => SetValue(TitleTemplateProperty, value);
     }
 
     /// <summary>
@@ -1009,32 +1025,34 @@ public class ManagedWindow : OverlayPopupHost
 
         //if (this.Theme == null)
         //    this.Theme = (ControlTheme)this.FindResource("ManagedWindow");
-        _title = e.NameScope.Find<TextBlock>(PART_Title);
-
         _titleBar = e.NameScope.Find<Control>(PART_TitleBar);
+        var titleScope = _titleBar != null ? NameScope.GetNameScope(_titleBar) : null;
+
+        _title = e.NameScope.Find<TextBlock>(PART_Title) ?? titleScope?.Find<TextBlock>(PART_Title);
+
         if (_titleBar != null)
         {
             SetupDragging(_titleBar);
         }
 
-        var partMinimizeButton = e.NameScope.Find<Button>(PART_MinimizeButton);
+        var partMinimizeButton = e.NameScope.Find<Button>(PART_MinimizeButton) ?? titleScope?.Find<Button>(PART_MinimizeButton);
         if (partMinimizeButton != null)
         {
             partMinimizeButton.Click += OnMinimizeClick;
         }
 
-        var partMaximizeButton = e.NameScope.Find<Button>(PART_MaximizeButton);
+        var partMaximizeButton = e.NameScope.Find<Button>(PART_MaximizeButton) ?? titleScope?.Find<Button>(PART_MaximizeButton);
         if (partMaximizeButton != null)
         {
             partMaximizeButton.Click += OnMaximizeClick;
         }
-        var partRestoreButton = e.NameScope.Find<Button>(PART_RestoreButton);
+        var partRestoreButton = e.NameScope.Find<Button>(PART_RestoreButton) ?? titleScope?.Find<Button>(PART_RestoreButton);
         if (partRestoreButton != null)
         {
             partRestoreButton.Click += OnRestoreClick;
         }
 
-        var partCloseButton = e.NameScope.Find<Button>(PART_CloseButton);
+        var partCloseButton = e.NameScope.Find<Button>(PART_CloseButton) ?? titleScope?.Find<Button>(PART_CloseButton);
         if (partCloseButton != null)
         {
             partCloseButton.Click += OnCloseClick;

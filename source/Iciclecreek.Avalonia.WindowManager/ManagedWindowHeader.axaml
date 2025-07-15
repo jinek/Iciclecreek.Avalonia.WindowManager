@@ -1,0 +1,90 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
+                    xmlns:console="https://github.com/jinek/consolonia"
+                    xmlns:wm="using:Iciclecreek.Avalonia.WindowManager">
+
+  <ControlTemplate x:Key="ManagedWindowHeaderTemplate">
+    <Grid ColumnDefinitions="Auto * Auto"
+          Background="{DynamicResource ManagedWindow_TitleBarBackgroundBrush}">
+      <Grid.Styles>
+        <Style Selector="Button">
+          <Setter Property="Background" Value="Transparent" />
+        </Style>
+      </Grid.Styles>
+
+      <!-- Icon -->
+      <ContentPresenter Grid.Column="0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Content="{Binding Icon, RelativeSource={RelativeSource AncestorType=wm:ManagedWindow}}" />
+      <!-- Title -->
+      <TextBlock Name="PART_Title"
+                 Grid.Column="1"
+                 Foreground="{DynamicResource ManagedWindow_TitleBarForegroundBrush}"
+                 VerticalAlignment="Center"
+                 FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=wm:ManagedWindow}}"
+                 FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=wm:ManagedWindow}}"
+                 FontWeight="{Binding FontWeight, RelativeSource={RelativeSource AncestorType=wm:ManagedWindow}}"
+                 FontStyle="{Binding FontStyle, RelativeSource={RelativeSource AncestorType=wm:ManagedWindow}}"
+                 Text="{Binding Title, RelativeSource={RelativeSource AncestorType=wm:ManagedWindow}}" />
+
+      <!-- System Decorations (aka buttons)-->
+      <StackPanel Grid.Column="2"
+                  Orientation="Horizontal"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Right">
+        <StackPanel.Spacing>
+          <console:OnPlatformExtension x:TypeArguments="x:Double" Default="8" Console="-1" />
+        </StackPanel.Spacing>
+        <Button Name="PART_MinimizeButton"
+                IsTabStop="True"
+                Foreground="{DynamicResource ManagedWindow_TitleBarForegroundBrush}">
+          <console:OnPlatform Console="🗕">
+            <console:OnPlatform.Default>
+              <iconPacks:Codicons Kind="ChromeMinimize"
+                                  Width="{StaticResource ManagedWindow_SystemIconSize}"
+                                  Height="{StaticResource ManagedWindow_SystemIconSize}" />
+            </console:OnPlatform.Default>
+          </console:OnPlatform>
+        </Button>
+        <Button Name="PART_MaximizeButton"
+                IsVisible="False"
+                IsTabStop="True"
+                Foreground="{DynamicResource ManagedWindow_TitleBarForegroundBrush}">
+          <console:OnPlatform Console="🗖">
+            <console:OnPlatform.Default>
+              <iconPacks:Codicons Kind="ChromeMaximize"
+                                  Width="{StaticResource ManagedWindow_SystemIconSize}"
+                                  Height="{StaticResource ManagedWindow_SystemIconSize}" />
+            </console:OnPlatform.Default>
+          </console:OnPlatform>
+        </Button>
+        <Button Name="PART_RestoreButton"
+                IsVisible="False"
+                IsTabStop="True"
+                Foreground="{DynamicResource ManagedWindow_TitleBarForegroundBrush}">
+          <console:OnPlatform Console="🗗">
+            <console:OnPlatform.Default>
+              <iconPacks:Codicons Kind="ChromeRestore"
+                                  Width="{StaticResource ManagedWindow_SystemIconSize}"
+                                  Height="{StaticResource ManagedWindow_SystemIconSize}" />
+            </console:OnPlatform.Default>
+          </console:OnPlatform>
+        </Button>
+        <Button Name="PART_CloseButton"
+                IsTabStop="True"
+                Foreground="{DynamicResource ManagedWindow_TitleBarForegroundBrush}">
+          <console:OnPlatform Console="🗙">
+            <console:OnPlatform.Default>
+              <iconPacks:Codicons Kind="ChromeClose"
+                                  Width="{StaticResource ManagedWindow_SystemIconSize}"
+                                  Height="{StaticResource ManagedWindow_SystemIconSize}" />
+            </console:OnPlatform.Default>
+          </console:OnPlatform>
+        </Button>
+      </StackPanel>
+    </Grid>
+  </ControlTemplate>
+
+</ResourceDictionary>

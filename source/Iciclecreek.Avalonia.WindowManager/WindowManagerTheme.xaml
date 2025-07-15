@@ -11,6 +11,7 @@
       <!-- control styles -->
       <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="avares://Iciclecreek.Avalonia.WindowManager/ManagedWindow.axaml" />
+        <ResourceInclude Source="avares://Iciclecreek.Avalonia.WindowManager/ManagedWindowHeader.axaml" />
       </ResourceDictionary.MergedDictionaries>
 
       <!-- themed resources -->
