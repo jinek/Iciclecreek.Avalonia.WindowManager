@@ -4,7 +4,7 @@
                     xmlns:console="https://github.com/jinek/consolonia"
                     xmlns:wm="using:Iciclecreek.Avalonia.WindowManager">
 
-  <ControlTemplate x:Key="ManagedWindowHeaderTemplate">
+  <DataTemplate x:Key="ManagedWindowHeaderTemplate" DataType="wm:ManagedWindow">
     <Grid ColumnDefinitions="Auto * Auto"
           Background="{DynamicResource ManagedWindow_TitleBarBackgroundBrush}">
       <Grid.Styles>
@@ -85,6 +85,6 @@
         </Button>
       </StackPanel>
     </Grid>
-  </ControlTemplate>
+  </DataTemplate>
 
 </ResourceDictionary>

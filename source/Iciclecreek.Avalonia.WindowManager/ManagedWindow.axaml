@@ -53,7 +53,9 @@
                   Background="{TemplateBinding Background}">
 
               <!--Title Bar-->
-                <ContentControl Name="PART_TitleBar" Template="{TemplateBinding TitleTemplate}" />
+                <ContentControl Name="PART_TitleBar"
+                                DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                ContentTemplate="{TemplateBinding TitleTemplate}" />
 
               <!-- window content-->
               <ContentPresenter Grid.Row="1"

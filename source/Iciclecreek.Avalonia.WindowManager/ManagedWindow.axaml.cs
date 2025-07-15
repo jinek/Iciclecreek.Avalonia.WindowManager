@@ -118,8 +118,8 @@ public class ManagedWindow : OverlayPopupHost
     /// <summary>
     /// Defines the <see cref="TitleTemplate"/> property.
     /// </summary>
-    public static readonly StyledProperty<IControlTemplate?> TitleTemplateProperty =
-        AvaloniaProperty.Register<ManagedWindow, IControlTemplate?>(nameof(TitleTemplate));
+    public static readonly StyledProperty<IDataTemplate?> TitleTemplateProperty =
+        AvaloniaProperty.Register<ManagedWindow, IDataTemplate?>(nameof(TitleTemplate));
 
     /// <summary>
     /// Defines the <see cref="WindowStartupLocation"/> property.
@@ -303,7 +303,7 @@ public class ManagedWindow : OverlayPopupHost
     /// <summary>
     /// Gets or sets the template for the window header.
     /// </summary>
-    public IControlTemplate? TitleTemplate
+    public IDataTemplate? TitleTemplate
     {
         get => GetValue(TitleTemplateProperty);
         set => SetValue(TitleTemplateProperty, value);
